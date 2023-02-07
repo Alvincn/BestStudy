@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/Alvincn/BestStudy/issues"
   },
-  "homepage": "https://github.com/Alvincn/BestStudy#readme"
+  "homepage": "https://github.com/Alvincn/BestStudy#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
 }
