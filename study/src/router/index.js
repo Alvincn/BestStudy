@@ -13,7 +13,7 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login',
+      redirect: '/home',
     },
     {
       path: '/home',
