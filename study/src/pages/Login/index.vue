@@ -1,5 +1,26 @@
 <template>
-  <div id="login"></div>
+  <div id="login">
+    <h2>BestStudy</h2>
+    <div id="form">
+      <div class="wave-group">
+        <input required="" type="text" class="input" />
+        <span class="bar"></span>
+        <label class="label">
+          <span class="label-char" style="--index: 0">用</span>
+          <span class="label-char" style="--index: 1">户</span>
+          <span class="label-char" style="--index: 2">名</span>
+        </label>
+      </div>
+      <div class="wave-group">
+        <input required="" type="text" class="input" />
+        <span class="bar"></span>
+        <label class="label">
+          <span class="label-char" style="--index: 0">密</span>
+          <span class="label-char" style="--index: 1">码</span>
+        </label>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
