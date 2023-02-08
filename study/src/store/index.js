@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import vuex from 'vuex';
-import { reqUserLogin } from '@/api/index.js';
 // 使用vuex
 Vue.use(vuex);
 // 创建vuex四大护法
@@ -16,15 +15,11 @@ const state = {};
 // 修改state的唯一手段
 const mutations = {};
 // 处理action,可以书写自己的业务逻辑
-const actions = {
-  async userLogin({ commit }) {
-    const result = await reqUserLogin();
-    console.log(result);
-  },
-};
+const actions = {};
 // 相当于计算属性
 const getters = {};
 export default new vuex.Store({
+  namespaced: true,
   state,
   mutations,
   actions,

@@ -8,5 +8,7 @@ const userHandler = require('../router_handler/user');
 router.post('/register', userHandler.reqUser);
 //登录
 router.post('/login', userHandler.login);
+// 获取验证码
+router.post('/getCode', userHandler.getCode);
 // 将此文件暴露出去
 module.exports = router;

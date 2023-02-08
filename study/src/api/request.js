@@ -15,6 +15,7 @@ const requests = axios.create({
 requests.interceptors.request.use((config) => {
   // config 配置对象，对象里边有一个属性很重要，就是header请求头
   // 进度条开始
+  config.headers.isMyApi = 'chenboboYYDS';
   nProgress.start();
   return config;
 });
@@ -24,14 +25,110 @@ requests.interceptors.response.use(
   (res) => {
     // 当响应成功时的回调
     // 进度条结束
-    console.log(res.data);
-    nProgress.done();
-    return res.data;
+    if (res.data.status == 200) {
+      nProgress.done();
+      return Promise.resolve(res);
+    } else {
+      return Promise.reject(res.data);
+    }
+    // return res;
   },
   // 当响应失败的回调
   (error) => {
-    return Promise.reject(new Error('fail'));
+    return Promise.reject('error');
   }
 );
 
-export default requests;
+/*
+ *封装get方法
+ *@param{String} url [请求地址]
+ *@param{Object} params 请求参数
+ */
+export function Get(url, params) {
+  return new Promise((resolve, reject) => {
+    requests
+      .get(url, {
+        params: params,
+      })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((error) => {
+        reject(error.data);
+      });
+  });
+}
+
+/**
+ *封装post方法
+ *@param{String} url 请求地址
+ *@param{Object} params 请求参数
+ */
+export function Post(url, params) {
+  return new Promise((resolve, reject) => {
+    requests
+      .post(url, params)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((error) => {
+        reject(error.data);
+      });
+  });
+}
+
+/**
+ *封装put方法
+ *@param{String} url 请求地址
+ *@param{Object} params 请求参数
+ */
+export function Put(url, params) {
+  return new Promise((resolve, reject) => {
+    requests
+      .put(url, params)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((error) => {
+        reject(error.data);
+      });
+  });
+}
+
+/**
+ *封装patch方法
+ *@param{String} url 请求地址
+ *@param{Object} params 请求参数
+ */
+export function Patch(url, params) {
+  return new Promise((resolve, reject) => {
+    requests
+      .put(url, params)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((error) => {
+        reject(error.data);
+      });
+  });
+}
+
+/**
+ *封装delete方法
+ *@param{String} url [请求地址]
+ *@param{Object} params [请求参数]
+ */
+export function Delete(url, params) {
+  return new Promise((resolve, reject) => {
+    requests
+      .delete(url, {
+        params: params,
+      })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((error) => {
+        reject(error.data);
+      });
+  });
+}

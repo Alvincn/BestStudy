@@ -1,58 +1,220 @@
 <template>
   <div id="login">
     <div id="title">
-      <h2 style="">BestStudy</h2>
-      <h2 style="font-size: 2rem">优学习</h2>
+      <transition name="el-fade-in-linear">
+        <h2>BestStudy <span v-show="!isLogin" style="font-size: 2rem">优学习</span></h2></transition
+      >
+      <h2 style="font-size: 2rem" v-show="isLogin">优学习</h2>
     </div>
-
-    <div id="form">
-      <div class="wave-group" style="">
-        <input required="" type="text" class="input" />
-        <span class="bar"></span>
-        <label class="label">
-          <span class="label-char" style="--index: 0">用</span>
-          <span class="label-char" style="--index: 1">户</span>
-          <span class="label-char" style="--index: 2">名</span>
-          <span class="label-char" style="--index: 3">/</span>
-          <span class="label-char" style="--index: 4">邮</span>
-          <span class="label-char" style="--index: 5">箱</span>
-          <span class="label-char" style="--index: 6">/</span>
-          <span class="label-char" style="--index: 7">电</span>
-          <span class="label-char" style="--index: 8">话</span>
-          <span class="label-char" style="--index: 9">号</span>
-        </label>
+    <!-- 判断是否是登录状态 -->
+    <transition name="el-fade-in-linear">
+      <div id="form" v-show="isLogin">
+        <div class="wave-group" style="">
+          <input required="" type="text" class="input" v-model="loginUsername" />
+          <span class="bar"></span>
+          <label class="label">
+            <span class="label-char" style="--index: 0">用</span>
+            <span class="label-char" style="--index: 1">户</span>
+            <span class="label-char" style="--index: 2">名</span>
+            <span class="label-char" style="--index: 3">/</span>
+            <span class="label-char" style="--index: 4">邮</span>
+            <span class="label-char" style="--index: 5">箱</span>
+            <span class="label-char" style="--index: 6">/</span>
+            <span class="label-char" style="--index: 7">电</span>
+            <span class="label-char" style="--index: 8">话</span>
+            <span class="label-char" style="--index: 9">号</span>
+          </label>
+        </div>
+        <div class="wave-group">
+          <div id="wave">
+            <input required="" type="text" class="input" v-model="loginPasswrod" />
+            <span class="bar"></span>
+            <label class="label">
+              <span class="label-char" style="--index: 0">密</span>
+              <span class="label-char" style="--index: 1">码</span>
+            </label>
+          </div>
+        </div>
+        <button class="cssbuttons-io-button">
+          登 录
+          <div class="icon">
+            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+        </button>
+        <span class="toRegister" style="" @click="changeRegister()">还没账号嘛?立即注册></span>
       </div>
-      <div class="wave-group">
-        <div id="wave">
-          <input required="" type="text" class="input" />
+    </transition>
+    <!-- 这是注册状态 -->
+    <transition name="el-fade-in-linear">
+      <div id="form1" v-show="isRegister">
+        <div class="wave-group" style="">
+          <input required="" type="text" class="input" v-model="registerUsername" />
+          <span class="bar"></span>
+          <label class="label">
+            <span class="label-char" style="--index: 0">用</span>
+            <span class="label-char" style="--index: 1">户</span>
+            <span class="label-char" style="--index: 2">名</span>
+          </label>
+        </div>
+        <div class="wave-group" style="">
+          <input required="" type="text" class="input" v-model="registerPasswrod" />
           <span class="bar"></span>
           <label class="label">
             <span class="label-char" style="--index: 0">密</span>
             <span class="label-char" style="--index: 1">码</span>
           </label>
         </div>
-      </div>
-      <button class="cssbuttons-io-button">
-        登 录
-        <div class="icon">
-          <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0h24v24H0z" fill="none"></path>
-            <path
-              d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-              fill="currentColor"
-            ></path>
-          </svg>
+        <div class="wave-group">
+          <div id="wave">
+            <input required="" type="text" class="input" v-model="confimPasswrod" />
+            <span class="bar"></span>
+            <label class="label">
+              <span class="label-char" style="--index: 0">确</span>
+              <span class="label-char" style="--index: 1">认</span>
+              <span class="label-char" style="--index: 2">密</span>
+              <span class="label-char" style="--index: 3">码</span>
+            </label>
+          </div>
         </div>
-      </button>
-    </div>
+        <div class="wave-group">
+          <div id="wave">
+            <input required="" type="text" class="input" v-model="email" />
+            <span class="bar"></span>
+            <label class="label">
+              <span class="label-char" style="--index: 0">邮</span>
+              <span class="label-char" style="--index: 1">箱</span>
+            </label>
+          </div>
+        </div>
+        <div class="wave-group">
+          <div id="wave">
+            <input required="" type="text" class="input" v-model="emailCode" />
+            <button class="getCode" @click="getCode()">获取验证码</button>
+            <span class="bar"></span>
+            <label class="label">
+              <span class="label-char" style="--index: 0">邮</span>
+              <span class="label-char" style="--index: 1">箱</span>
+              <span class="label-char" style="--index: 2">验</span>
+              <span class="label-char" style="--index: 3">证</span>
+              <span class="label-char" style="--index: 4">码</span>
+            </label>
+          </div>
+        </div>
+        <button class="cssbuttons-io-button" @click="register()">
+          注 册
+          <div class="icon">
+            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+        </button>
+        <span class="toRegister" style="" @click="changeRegister()">已经有账号啦?去登录></span>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Login',
+  data() {
+    return {
+      isLogin: false,
+      isRegister: true,
+      // 登录时用户名
+      loginUsername: '',
+      // 登录密码
+      loginPasswrod: '',
+      // 注册用户名
+      registerUsername: '',
+      // 注册密码
+      registerPasswrod: '',
+      // 确认密码
+      confimPasswrod: '',
+      // 邮箱
+      email: '',
+      // 邮箱验证码
+      emailCode: '',
+      // 正确的邮箱验证码
+      trueCode: '',
+    };
+  },
   mounted() {
-    this.$store.dispatch('userLogin');
+    // this.$axios.Login().then((res) => {
+    //   console.log(res);
+    // });
+  },
+  methods: {
+    // 登录注册切换
+    changeRegister() {
+      if (this.isLogin == true) {
+        this.isLogin = false;
+        this.isRegister = true;
+      } else {
+        this.isRegister = false;
+        this.isLogin = true;
+      }
+    },
+    // 获取邮箱验证码
+    getCode() {
+      if (this.registerUsername.trim() == '' || this.registerPasswrod.trim() == '') {
+        this.$message({
+          message: '小淘气，用户名和密码不可以为空哦',
+          type: 'error',
+        });
+      } else if (this.confimPasswrod.trim() !== this.registerPasswrod.trim()) {
+        this.$message({
+          message: '两次密码输入好像不一致呢，要不要检查一下呀',
+          type: 'error',
+        });
+      } else if (this.email.trim == '') {
+        this.$message({
+          message: '邮箱不可以为空哦',
+          type: 'error',
+        });
+      } else {
+        this.$axios
+          .getCode()
+          .then((res) => {
+            this.$message({
+              message: '验证码已发送',
+              type: 'success',
+            });
+            let number = Math.ceil(((res.data - 28888 * 349 + 3478) * 2588) / 8888);
+            this.trueCode = number;
+          })
+          .catch((error) => {
+            this.$message({
+              message: '验证码发送失败' + error,
+              type: 'error',
+            });
+          });
+      }
+    },
+    // 注册
+    register() {
+      if (this.emailCode == this.trueCode) {
+        this.$message({
+          message: '注册成功',
+          type: 'success',
+        });
+      } else {
+        this.$message({
+          message: '邮箱验证码错误',
+          type: 'error',
+        });
+      }
+    },
   },
 };
 </script>
@@ -103,6 +265,7 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 100;
+  position: relative;
 }
 /* 输入框文字 */
 #title h2 {
@@ -117,8 +280,20 @@ export default {
 #title {
   padding-top: 40px;
 }
+.toRegister {
+  color: #a370f0;
+  text-align: end;
+  width: 100%;
+  transform: translateY(20px);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding-right: 20px;
+}
+.toRegister:hover {
+  text-decoration: underline;
+}
 #form {
-  width: 25%;
+  width: 30%;
   height: 35%;
   text-align: center;
   /* 实现毛玻璃效果 */
@@ -142,6 +317,33 @@ export default {
   justify-content: center;
   /* 设置内边距 */
   padding: 20px, 10px;
+}
+#form1 {
+  width: 27%;
+  // height: 35%;
+  text-align: center;
+  /* 实现毛玻璃效果 */
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 25px;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.4);
+  /* 毛玻璃完成 */
+  /* 设置层级 */
+  z-index: 101;
+  /* 进行居中 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* 设置文本框居中 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* 设置内边距 */
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .wave-group {
   text-align: center;
@@ -275,5 +477,21 @@ export default {
   .wave-group {
     margin-bottom: 40px;
   }
+}
+// 手机验证码样式
+.getCode {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  border: none;
+  border-radius: 0 6px 0 0;
+  background-color: #a370f0;
+  color: white;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+.getCode:hover {
+  background-color: #5e5dcd;
 }
 </style>

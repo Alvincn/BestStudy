@@ -7,6 +7,10 @@
 <script>
 export default {
   name: 'App',
+  mounted() {
+    let height = window.screen.availHeight;
+    document.body.style.height = height + 'px';
+  },
 };
 </script>
 
@@ -18,10 +22,11 @@ root {
 }
 body {
   width: 100vw;
-  height: 100vh;
   margin: 0;
   padding: 0;
 }
 #app {
+  width: 100%;
+  height: 100%;
 }
 </style>
