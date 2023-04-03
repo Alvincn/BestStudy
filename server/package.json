@@ -18,8 +18,14 @@
   },
   "homepage": "https://github.com/Alvincn/BestStudy#readme",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "encodeurl": "^1.0.2",
+    "escape-html": "^1.0.3",
     "express": "^4.18.2",
+    "finalhandler": "^1.2.0",
+    "merge-descriptors": "^1.0.1",
+    "ms": "^2.1.3",
     "mysql": "^2.18.1"
   }
 }

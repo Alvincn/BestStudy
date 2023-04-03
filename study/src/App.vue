@@ -22,8 +22,10 @@ root {
 }
 body {
   width: 100vw;
+  overflow: hidden;
   margin: 0;
   padding: 0;
+  
 }
 #app {
   width: 100%;

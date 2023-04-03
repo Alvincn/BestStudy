@@ -6,12 +6,12 @@ import { Get, Post, Put, Patch, Delete } from '@/api/request';
 // 用户登录接口
 export default {
   // 登录
-  Login: () => {
-    return Post('/login');
+  Login: (user) => {
+    return Post('/login', user);
   },
   // 注册
-  Register: () => {
-    return Post('/register');
+  Register: (user) => {
+    return Post('/register', user);
   },
   // 获取邮箱验证码
   getCode: () => {

@@ -1,14 +1,15 @@
 <template>
   <div id="home">
-    The page is home
-    <el-button>默认按钮</el-button>
-    <el-button type="primary">主要按钮</el-button>
+    <tab-bar></tab-bar>
   </div>
 </template>
 
 <script>
+import tabBar from "@/components/tabBar";
+
 export default {
   name: 'Home',
+  components: {tabBar}
 };
 </script>
 
